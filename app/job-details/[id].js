@@ -9,7 +9,7 @@ import { Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, Specifics } fro
 import useFetch from "../../hook/useFetch";
 import { COLORS, icons, SIZES } from "../../constants";
 
-const tabs = ["About", "Qualifications", "Responsibilities"];
+const tabs = ["About", "Qualifications", "Skills"];
 
 const JobDetails = () => {
     const params = useGlobalSearchParams();
@@ -32,11 +32,15 @@ const JobDetails = () => {
                     title="Qualifications"
                     points={data[0].job_highlights?.Qualifications ?? ['N/A']}
                 />
-                break;
             case "About":
-                break;
-            case "Responsibilitie":
-                break;
+                return <JobAbout
+                    info={data[0].job_description ?? 'No data provided'}
+                />
+            case "Skills":
+                return <Specifics
+                    title="Skills"
+                    points={data[0].job_required_skills ?? ['N/A']}
+                />
         }
     }
 
